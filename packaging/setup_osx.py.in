@@ -22,8 +22,8 @@ def load_pyqt5_qtquick(finder, module):
 hooks.load_PyQt5_QtQuick = load_pyqt5_qtquick
 
 search_path = sys.path.copy()
-search_path.insert(1, "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.5/site-packages/")
-search_path.insert(2, "@CMAKE_PREFIX_PATH@/lib/python3.5/site-packages/")
+search_path.insert(1, "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.6/site-packages/")
+search_path.insert(2, "@CMAKE_PREFIX_PATH@/lib/python3.6/site-packages/")
 search_path.insert(3, "@CMAKE_PREFIX_PATH@/lib")
 
 # Dependencies are automatically detected, but it might need
@@ -52,7 +52,7 @@ build_options = {
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine", ""),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/cura", "plugins"),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/uranium", "plugins"),
-        ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.5/site-packages/UM/Qt/qml/UM", "qml/UM"),
+        ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.6/site-packages/UM/Qt/qml/UM", "qml/UM"),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/cura/resources", "resources"),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/uranium/resources", "resources"),
         ("@CMAKE_PREFIX_PATH@/lib/qml/Qt", "qml/Qt"),
