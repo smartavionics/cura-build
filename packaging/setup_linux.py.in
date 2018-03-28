@@ -76,6 +76,7 @@ build_options = {
         "/lib64",
         "/usr/lib",
         "/usr/lib64",
+        "@CMAKE_PREFIX_PATH@/lib",
     ],
     "bin_includes": [
         "libssl3",
