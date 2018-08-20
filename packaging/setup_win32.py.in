@@ -69,13 +69,13 @@ hooks.load_PyQt5_QtQuick = load_pyqt5_qtquick
 def load_pyqt5_qtnetwork(finder, module):
     finder.IncludeModule("PyQt5.QtCore")
 
-    ssl_lib_dir = "@CMAKE_PREFIX_PATH@/lib"
+    qt_path = os.path.join(os.path.dirname(PyQt5.QtCore.__file__), "Qt", "bin")
     required_ssl_files = [
         "libeay32.dll",
         "ssleay32.dll",
     ]
     for file_name in required_ssl_files:
-        finder.IncludeFiles(os.path.join(ssl_lib_dir, file_name), file_name)
+        finder.IncludeFiles(os.path.join(qt_path, file_name), file_name)
 
 hooks.load_PyQt5_QtNetwork = load_pyqt5_qtnetwork
 
@@ -127,11 +127,11 @@ build_options = {
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/cura/resources", "resources"),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/uranium/resources", "resources"),
         # Preinstalled PyQt5 installation
-        ("@CMAKE_PREFIX_PATH@/lib/qml/Qt", "qml/Qt"),
-        ("@CMAKE_PREFIX_PATH@/lib/qml/QtQml", "qml/QtQml"),
-        ("@CMAKE_PREFIX_PATH@/lib/qml/QtQuick", "qml/QtQuick"),
-        ("@CMAKE_PREFIX_PATH@/lib/qml/QtQuick.2", "qml/QtQuick.2"),
-        ("@CMAKE_PREFIX_PATH@/lib/qml/QtGraphicalEffects", "qml/QtGraphicalEffects"),
+        ("@CMAKE_PREFIX_PATH@/lib/site-packages/PyQt5/Qt/qml/Qt", "qml/Qt"),
+        ("@CMAKE_PREFIX_PATH@/lib/site-packages/PyQt5/Qt/qml/QtQml", "qml/QtQml"),
+        ("@CMAKE_PREFIX_PATH@/lib/site-packages/PyQt5/Qt/qml/QtQuick", "qml/QtQuick"),
+        ("@CMAKE_PREFIX_PATH@/lib/site-packages/PyQt5/Qt/qml/QtQuick.2", "qml/QtQuick.2"),
+        ("@CMAKE_PREFIX_PATH@/lib/site-packages/PyQt5/Qt/qml/QtGraphicalEffects", "qml/QtGraphicalEffects"),
     ],
     "excludes": [ ],
     "replace_paths": [("*", "")],
