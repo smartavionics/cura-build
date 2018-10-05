@@ -13,7 +13,7 @@ include(GetFromEnvironmentOrCache)
 include(SetProjectDependencies)
 
 option(BUILD_PACKAGE "Create a package with the build of Cura" ON)
-option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" ON)
+option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" OFF)
 
 if(SIGN_PACKAGE)
     set(BUILD_PACKAGE ON)
@@ -47,7 +47,7 @@ GetFromEnvironmentOrCache(CURA_VERSION_EXTRA "${TAG_OR_BRANCH}" STRING "Cura Ext
 
 GetFromEnvironmentOrCache(CURA_EXTRA_PROJECTS_DIR "" STRING "Directory where extra projects to build are located.")
 
-set(CURA_VERSION "${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH}")
+set(CURA_VERSION "master")
 if(NOT "${CURA_VERSION_EXTRA}" STREQUAL "")
     set(CURA_VERSION "${CURA_VERSION}-${CURA_VERSION_EXTRA}")
 endif()
