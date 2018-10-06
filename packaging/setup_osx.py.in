@@ -62,8 +62,8 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/qml/QtCharts", "qml/QtCharts"),
         ("@CMAKE_PREFIX_PATH@/lib/qml/QtDataVisualization", "qml/QtDataVisualization"),
         ("@CMAKE_PREFIX_PATH@/lib/qml/QtGraphicalEffects", "qml/QtGraphicalEffects"),
-        ("/usr/local/Cellar/geos/3.6.2/lib/libgeos-3.6.2.dylib", "lib/python3.5/shapely/.dylibs/libgeos-3.6.2.dylib"),
-        ("/usr/local/Cellar/geos/3.6.2/lib/libgeos_c.1.dylib", "lib/python3.5/shapely/.dylibs/libgeos_c.1.dylib"),
+        ("/usr/local/Cellar/geos/3.6.3/lib/libgeos-3.6.3.dylib", "lib/python3.5/shapely/.dylibs/libgeos-3.6.3.dylib"),
+        ("/usr/local/Cellar/geos/3.6.3/lib/libgeos_c.1.dylib", "lib/python3.5/shapely/.dylibs/libgeos_c.1.dylib"),
     ],
     "excludes": [ ],
     "zip_include_packages": [ "PyQt5" ],
@@ -84,7 +84,7 @@ executables = [
 
 setup(
     name = "Ultimaker Cura",
-    version = "@CURA_VERSION_MAJOR@.@CURA_VERSION_MINOR@.@CURA_VERSION_PATCH@",
+    version = "master",
     description = "3D Printing Software",
     author = "Ultimaker B.V.",
     url = "http://software.ultimaker.com/",

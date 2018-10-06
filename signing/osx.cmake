@@ -1,4 +1,4 @@
-set(OSX_CODESIGN_IDENTITY "Mac Developer" CACHE STRING "Identity to use for code signing")
+set(OSX_CODESIGN_IDENTITY "Mark Burton" CACHE STRING "Identity to use for code signing")
 
 add_custom_command(
     TARGET signing PRE_BUILD
