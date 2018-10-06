@@ -1,6 +1,6 @@
 #! /bin/sh
 
-NAME=cura-mb-master-`date +%Y%m%d`
+NAME=Cura-mb-master-`date +%Y%m%d`
 
 rm -rf cura-mb-master.app
 mv build/Ultimaker\ Cura.app cura-mb-master.app
