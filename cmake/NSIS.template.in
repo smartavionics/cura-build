@@ -476,21 +476,21 @@ FunctionEnd
 !insertmacro StrStr "un."
 
 Function Trim ; Added by Pelaca
-	Exch $R1
-	Push $R2
+  Exch $R1
+  Push $R2
 Loop:
-	StrCpy $R2 "$R1" 1 -1
-	StrCmp "$R2" " " RTrim
-	StrCmp "$R2" "$\n" RTrim
-	StrCmp "$R2" "$\r" RTrim
-	StrCmp "$R2" ";" RTrim
-	GoTo Done
+  StrCpy $R2 "$R1" 1 -1
+  StrCmp "$R2" " " RTrim
+  StrCmp "$R2" "$\n" RTrim
+  StrCmp "$R2" "$\r" RTrim
+  StrCmp "$R2" ";" RTrim
+  GoTo Done
 RTrim:
-	StrCpy $R1 "$R1" -1
-	Goto Loop
+  StrCpy $R1 "$R1" -1
+  Goto Loop
 Done:
-	Pop $R2
-	Exch $R1
+  Pop $R2
+  Exch $R1
 FunctionEnd
 
 Function ConditionalAddToRegisty
@@ -555,6 +555,11 @@ SectionEnd
 
 Section /o "Open X3D files with Cura"
     ${RegisterExtension} "$INSTDIR\Cura.exe" ".x3d" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.x3d.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@" "X3D model file"
+SectionEnd
+
+Section /o "Open GCODE files with Cura"
+    ${RegisterExtension} "$INSTDIR\Cura.exe" ".gcode" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.gcode.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@" "GCODE model file"
+    ${RegisterExtension} "$INSTDIR\Cura.exe" ".g"     "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.g.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"     "GCODE model file"
 SectionEnd
 
 ;--------------------------------
@@ -742,14 +747,18 @@ Section "-Core installation"
 
   !insertmacro MUI_STARTMENU_WRITE_END
 
+  ; Do not install the VS C++ redistributable package in silent installation
+  IfSilent +3
   IntCmp $vcredist_selected 0 +2
   ExecWait '"$INSTDIR\vcredist_x@CPACK_NSIS_PACKAGE_ARCHITECTURE@.exe" /install /quiet /norestart'
 
+  ; Do not install the arduino driver in silent installation
+  IfSilent +7
   IntCmp $arduino_selected 0 +6
   ${If} ${RunningX64}
-    ExecWait '"$INSTDIR\arduino\dpinst-amd64.exe" /lm /sw'
+      ExecWait '"$INSTDIR\arduino\dpinst-amd64.exe" /lm /sw'
   ${Else}
-    ExecWait '"$INSTDIR\arduino\dpinst-x86.exe" /lm /sw'
+      ExecWait '"$INSTDIR\arduino\dpinst-x86.exe" /lm /sw'
   ${EndIf}
 
 @CPACK_NSIS_EXTRA_INSTALL_COMMANDS@
@@ -876,11 +885,13 @@ Section "Uninstall"
   Delete "$INSTDIR\AddRemove.exe"
 !endif
 
-  ;Unregister file assiciations
+  ;Unregister file associations
   ${UnRegisterExtension} ".3mf" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.3mf.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
   ${UnRegisterExtension} ".obj" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.obj.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
   ${UnRegisterExtension} ".stl" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.stl.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
   ${UnRegisterExtension} ".x3d" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.x3d.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
+  ${UnRegisterExtension} ".gcode" "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.gcode.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
+  ${UnRegisterExtension} ".g"     "@CPACK_PACKAGE_NAME_NO_WHITESPACES@.g.@CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@"
 
   ;Remove executable from MuiCache
   DeleteRegKey HKCR "Local Settings\Software\Microsoft\Windows\Shell\MuiCache\$INSTDIR\Cura.exe.ApplicationCompany"
@@ -1016,6 +1027,9 @@ Function .onInit
   !insertmacro uninstallVersion "Ultimaker Cura 3.1" "Ultimaker Cura 3.1" "U31"
   !insertmacro uninstallVersion "Ultimaker Cura 3.2" "Ultimaker Cura 3.2" "U32"
   !insertmacro uninstallVersion "Ultimaker Cura 3.3" "Ultimaker Cura 3.3" "U33"
+  !insertmacro uninstallVersion "Ultimaker Cura 3.4" "Ultimaker Cura 3.4" "U34"
+  !insertmacro uninstallVersion "Ultimaker Cura 3.5" "Ultimaker Cura 3.5" "U35"
+  !insertmacro uninstallVersion "Ultimaker Cura 3.6" "Ultimaker Cura 3.6" "U36"
   !insertmacro uninstallVersion "Ultimaker Cura @CPACK_PACKAGE_VERSION_MAJOR@.@CPACK_PACKAGE_VERSION_MINOR@" "@CPACK_PACKAGE_INSTALL_REGISTRY_KEY@" "latest"
 
 inst:
