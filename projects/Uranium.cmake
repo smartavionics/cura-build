@@ -9,7 +9,7 @@ find_package(SciPy 0.17 REQUIRED)
 
 ExternalProject_Add(Uranium
     GIT_REPOSITORY https://github.com/smartavionics/Uranium
-    GIT_TAG mb-master-4.0
+    GIT_TAG mb-master
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNALPROJECT_INSTALL_PREFIX} -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
 )
 
