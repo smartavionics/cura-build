@@ -77,9 +77,7 @@ build_options = {
     "bin_path_includes": [
         "@CMAKE_PREFIX_PATH@/lib",
         "/lib",
-        "/lib64",
         "/usr/lib",
-        "/usr/lib64",
     ],
     "bin_excludes": [
         "linux-vdso.so.1",
@@ -90,7 +88,8 @@ build_options = {
         "libm.so.6",
         "libgcc_s.so.1",
         "libc.so.6",
-        "ld-linux-x86-64.so.2",
+        "ld-linux-armhf.so.3",
+        "libarmmem-v7l.so",
         "libz.so.1",
         "libgcc_s.so.1",
         "libglib-2.0",
