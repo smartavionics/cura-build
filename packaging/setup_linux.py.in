@@ -90,7 +90,6 @@ build_options = {
         "libm.so.6",
         "libgcc_s.so.1",
         "libc.so.6",
-        "ld-linux-x86-64.so.2",
         "libz.so.1",
         "libgcc_s.so.1",
         "libglib-2.0",
@@ -124,6 +123,11 @@ build_options = {
         "libXrender.so.1",
         "libcom_err.so.2",
         "libgssapi_krb5.so.2",
+    ] + [
+        "ld-linux-armhf.so.3",
+        "libarmmem-v7l.so",
+    ] if "@CMAKE_SYSTEM_PROCESSOR@" == "armv7l" else [
+        "ld-linux-x86-64.so.2",
     ]
 }
 
