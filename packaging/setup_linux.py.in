@@ -82,6 +82,9 @@ build_options = {
         "/usr/lib64",
     ],
     "bin_excludes": [
+        "ld-linux-x86-64.so.2",
+        "ld-linux-armhf.so.3",
+        "libarmmem-v7l.so",
         "linux-vdso.so.1",
         "libpthread.so.0",
         "libdl.so.2",
@@ -106,6 +109,25 @@ build_options = {
         "libX11.so.6",
         "libxcb-glx.so.0",
         "libxcb-dri2.so.0",
+        "libxcb-dri3.so.0",
+        "libxcb-present.so.0",
+        "libxcb-sync.so.1",
+        "libxcb-xfixes.so.0",
+        "libxcb-fixes.so.1",
+        "libXdmcp.so.6",
+        "libxshmfence.so.1",
+        "libwayland-client.so.0",
+        "libwayland-server.so.0",
+        "libxkbcommon.so.0",
+        "libmirclient.so.9",
+        "libmircommon.so.7",
+        "libmircore.so.1",
+        "libmirprotobuf.so.3",
+        "libicudata.so.55",
+        "libicui18n.so.55",
+        "libicuuc.so.55",
+        "libtinfo.so.5",
+        "libreadline.so.6",
         "libxcb.so.1",
         "libXxf86vm.so.1",
         "libdrm.so.2",
@@ -123,11 +145,6 @@ build_options = {
         "libXrender.so.1",
         "libcom_err.so.2",
         "libgssapi_krb5.so.2",
-    ] + [
-        "ld-linux-armhf.so.3",
-        "libarmmem-v7l.so",
-    ] if "@CMAKE_SYSTEM_PROCESSOR@" == "armv7l" else [
-        "ld-linux-x86-64.so.2",
     ]
 }
 
