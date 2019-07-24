@@ -13,7 +13,7 @@ include(GetFromEnvironmentOrCache)
 include(SetProjectDependencies)
 
 option(BUILD_PACKAGE "Create a package with the build of Cura" ON)
-option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" ON)
+option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" OFF)
 
 if(SIGN_PACKAGE)
     set(BUILD_PACKAGE ON)
