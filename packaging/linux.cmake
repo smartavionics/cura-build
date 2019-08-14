@@ -69,9 +69,16 @@ add_custom_command(
 
 set(APPIMAGE_FILENAME "Cura-${CURA_VERSION}.AppImage")
 
+# architecture detection in appimagetool is unreliable so explicitly specify the required architecture
+if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+    set(_appimage_arch arm) # not armhf
+else()
+    set(_appimage_arch x86_64)
+endif()
+
 add_custom_command(
     TARGET packaging POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${APPIMAGE_FILENAME}
-    COMMAND ${APPIMAGEKIT_APPIMAGETOOL_EXECUTABLE} -n --appimage-extract-and-run ${CMAKE_BINARY_DIR}/package ${APPIMAGE_FILENAME}
+    COMMAND env "ARCH=${_appimage_arch}" ${APPIMAGEKIT_APPIMAGETOOL_EXECUTABLE} -n --appimage-extract-and-run ${CMAKE_BINARY_DIR}/package ${APPIMAGE_FILENAME}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
