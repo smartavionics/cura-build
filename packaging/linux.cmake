@@ -12,32 +12,33 @@ add_custom_command(
 
 add_custom_command(
     TARGET packaging PRE_BUILD
-    COMMAND LD_LIBRARY_PATH=${CMAKE_PREFIX_PATH}/lib ${PYTHON_EXECUTABLE} setup.py build
+    COMMAND env "LD_LIBRARY_PATH=${CMAKE_PREFIX_PATH}/lib" ${Python3_EXECUTABLE} setup.py build
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMENT "Running cx_Freeze to generate executable..."
 )
 
 set(PACKAGE_DIR ${CMAKE_BINARY_DIR}/package)
 
-add_custom_command(
-    TARGET packaging PRE_BUILD
-    COMMAND ln -s libcrypto.so.10 libcrypto.so
-    COMMAND ln -s libssl.so.10 libssl.so
-    COMMENT "Creating symbolic links to libssl files and libgoes files..."
-    WORKING_DIRECTORY ${PACKAGE_DIR}/usr/bin
-)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/cura.desktop.in ${CMAKE_CURRENT_LIST_DIR}/cura.desktop @ONLY)
 
 add_custom_command(
     TARGET packaging PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy cura.desktop ${PACKAGE_DIR}
-    COMMENT "Copying icon and desktop file..."
+    COMMAND mkdir -p ${PACKAGE_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy cura.desktop ${PACKAGE_DIR}/cura.desktop
+    COMMENT "Copying desktop file ..."
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 )
 
 add_custom_command(
     TARGET packaging PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy cura-icon.png ${PACKAGE_DIR}
-    COMMENT "Copying icon and desktop file..."
+    COMMAND ${CMAKE_COMMAND} -E copy cura-icon_256x256.png ${PACKAGE_DIR}/cura-icon.png
+    COMMAND mkdir -p ${PACKAGE_DIR}/usr/share/icons/hicolor/64x64/apps/
+    COMMAND ${CMAKE_COMMAND} -E copy cura-icon_64x64.png ${PACKAGE_DIR}/usr/share/icons/hicolor/64x64/apps/cura-icon.png
+    COMMAND mkdir -p ${PACKAGE_DIR}/usr/share/icons/hicolor/128x128/apps/
+    COMMAND ${CMAKE_COMMAND} -E copy cura-icon_128x128.png ${PACKAGE_DIR}/usr/share/icons/hicolor/128x128/apps/cura-icon.png
+    COMMAND mkdir -p ${PACKAGE_DIR}/usr/share/icons/hicolor/256x256/apps/
+    COMMAND ${CMAKE_COMMAND} -E copy cura-icon_256x256.png ${PACKAGE_DIR}/usr/share/icons/hicolor/256x256/apps/cura-icon.png
+    COMMENT "Copying icon files ..."
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 )
 
@@ -57,15 +58,30 @@ add_custom_command(
 
 add_custom_command(
     TARGET packaging PRE_BUILD
+    COMMAND mkdir -p ${PACKAGE_DIR}/usr/share/metainfo/
+    COMMAND ${CMAKE_COMMAND} -E copy cura.appdata.xml ${PACKAGE_DIR}/usr/share/metainfo/
+    COMMENT "Installing AppStream metadata..."
+    WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
+)
+
+add_custom_command(
+    TARGET packaging PRE_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy ${APPIMAGEKIT_APPRUN_EXECUTABLE} ${PACKAGE_DIR}
     COMMENT "Copying AppRun executable..."
 )
 
 set(APPIMAGE_FILENAME "Cura-${CURA_VERSION}.AppImage")
 
+# architecture detection in appimagetool is unreliable so explicitly specify the required architecture
+if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+    set(_appimage_arch arm) # not armhf
+else()
+    set(_appimage_arch x86_64)
+endif()
+
 add_custom_command(
     TARGET packaging POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${APPIMAGE_FILENAME}
-    COMMAND ${APPIMAGEKIT_ASSISTANT_EXECUTABLE} ${CMAKE_BINARY_DIR}/package ${APPIMAGE_FILENAME}
+    COMMAND env "ARCH=${_appimage_arch}" ${APPIMAGEKIT_APPIMAGETOOL_EXECUTABLE} -n --appimage-extract-and-run ${CMAKE_BINARY_DIR}/package ${APPIMAGE_FILENAME}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )

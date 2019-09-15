@@ -21,6 +21,7 @@ def load_pyqt5_qtquick(finder, module):
     finder.IncludeModule("PyQt5.QtGui")
     finder.IncludeModule("PyQt5.QtQml")
     finder.IncludeModule("PyQt5.QtNetwork")
+    finder.IncludeModule("PyQt5.QtWebSockets")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_2_0")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_4_1_Core")
 
@@ -68,9 +69,10 @@ build_options = {
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/uranium/resources", "resources"),
         ("@CMAKE_PREFIX_PATH@/lib/plugins", "qt/plugins"),
         ("@CMAKE_PREFIX_PATH@/lib/qml", "qt/qml"),
-        ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", ""),
-        ("/etc/pki/tls/openssl.cnf", ""),   # We probably can remove this when we compile a dedicated OpenSSL
+        ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", ""),    # For shapely
+        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", ""),  # For shapely
+        ("@CMAKE_PREFIX_PATH@/lib/libopenctm.so", ""), # For opening .CTM files
+        ("@CMAKE_PREFIX_PATH@/openssl.cnf", ""),
     ],
     "optimize": 2,
     "bin_path_includes": [
@@ -80,12 +82,10 @@ build_options = {
         "/usr/lib",
         "/usr/lib64",
     ],
-    "bin_includes": [
-        "libssl3",
-        "libssl",
-        "libcrypto",
-    ],
     "bin_excludes": [
+        "ld-linux-x86-64.so.2",
+        "ld-linux-armhf.so.3",
+        "libarmmem-v7l.so",
         "linux-vdso.so.1",
         "libpthread.so.0",
         "libdl.so.2",
@@ -94,13 +94,14 @@ build_options = {
         "libm.so.6",
         "libgcc_s.so.1",
         "libc.so.6",
-        "ld-linux-x86-64.so.2",
         "libz.so.1",
         "libgcc_s.so.1",
         "libglib-2.0",
         "librt.so.1",
         "libcap.so.2",
         "libGL.so.1",
+        "libGLX.so.0",
+        "libGLdispatch.so.0",
         "libglapi.so.0",
         "libXext.so.6",
         "libXdamage.so.1",
@@ -109,6 +110,22 @@ build_options = {
         "libX11.so.6",
         "libxcb-glx.so.0",
         "libxcb-dri2.so.0",
+        "libxcb-dri3.so.0",
+        "libxcb-present.so.0",
+        "libxcb-sync.so.1",
+        "libxcb-xfixes.so.0",
+        "libxcb-fixes.so.1",
+        "libXdmcp.so.6",
+        "libxshmfence.so.1",
+        "libwayland-client.so.0",
+        "libwayland-server.so.0",
+        "libxkbcommon.so.0",
+        "libmirclient.so.9",
+        "libmircommon.so.7",
+        "libmircore.so.1",
+        "libmirprotobuf.so.3",
+        "libtinfo.so.5",
+        "libreadline.so.6",
         "libxcb.so.1",
         "libXxf86vm.so.1",
         "libdrm.so.2",

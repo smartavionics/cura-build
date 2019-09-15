@@ -4,6 +4,33 @@ This repository contains build scripts used to build Cura and all dependencies f
 
 The build has a number of dependencies. Ideally, these dependencies should be installed by the [cura-build-environment](https://github.com/Ultimaker/cura-build-environment) repository. Even with cura-build-environment though, some things may still be missing from your system that we haven't thought of.
 
+## (WIP) Build with docker (for Linux AppImage only)
+
+To build Linux AppImage with docker, you first need to have a working cura-build-environment docker image. Please check
+the `WIP_fix_docker` branch in [cura-build-environment repository](https://github.com/ultimaker/cura-build-environment).
+
+Assume that you have a working cura-build-environment docker image tagged as `cura-build-env:centos7`. To build an
+AppImage, run:
+
+```
+./scripts/build.sh
+```
+
+If the build is successful, the resulting AppImage will placed in the `appimages/` directory.
+
+To configure your AppImage build, you can use the following environment variables:
+
+ - `CURA_VERSION_MAJOR`: Major version number of Cura (default `4`)
+ - `CURA_VERSION_MINOR`: Minor version number of Cura (default `1`)
+ - `CURA_VERSION_PATCH`: Patch version number of Cura (default `99`)
+ - `CURA_VERSION_EXTRA`: Extra version string of Cura, which will be appended after `x.y.z` with `-<extra>`
+                         (default `docker`)
+ - `CURA_BUILD_NAME`: FIXME: default to `docker`, probably no use.
+ - `CURA_SDK_VERSION`:   SDK version of Cura in the form of semantic versioning (default `6.0.0`)
+ - `CURA_CLOUD_API_ROOT`: Root URL of Cura Cloud API (default `https://api.ultimaker.com`)
+ - `CURA_CLOUD_API_VERSION`: Cura Cloud API version to use (default `1`)
+ - `CURA_CLOUD_ACCOUNT_API_ROOT`: Root URL of Cura Cloud Account API (default `https://account.ultimaker.com`)
+
 ## OS X
 
 1. Install CMake (available via [homebrew](http://brew.sh/) or [cmake.org](http://www.cmake.org/))
@@ -40,6 +67,8 @@ On Windows, the following dependencies are needed for building:
   It can be easily installed via `pip3 install sip`
 * **Trimesh** from https://pypi.python.org/pypi/trimesh/2.32.1
   It can be easily installed via `pip3 install trimesh`
+* **PyCollada** from https://pypi.org/project/pycollada/0.6
+  It can be easily installed via `pip3 install pycollada`
 * **Shapely** from https://pypi.python.org/pypi/Shapely/1.6.4.post2
   It can be easily installed via `pip3 install shapely[vectorized]`. If it doesn't work, you'll need to download a .whl from https://www.lfd.uci.edu/~gohlke/pythonlibs/#shapely for Python 3.5 and install it via `pip install <your_whl_file>.whl`.
 * **Zeroconf** from https://pypi.python.org/pypi/zeroconf/0.17.6
@@ -51,7 +80,7 @@ On Windows, the following dependencies are needed for building:
   Install Programming languages: Visual c++ (all), Python Tools for Visual Studio (Nov 2015)
   Windows & Web Development: Universal Windows App Development Tools (Tools 1.2 & windows 10 SDK-10/0/10586; Windows 10 SDK -10.0.10240)
 * **cx_Freeze** (https://pypi.python.org/pypi/cx_Freeze)
-  The easiest way to install this is to use a wheel (*.whl file) and install it via `pip install <your_whl_file>.whl`. You may have to add `<python dir>/Scripts` to you `%PATH%`. (Last tested version was: cx_Freeze-5.0-cp35-cp35m-win_amd64.whl)
+  The easiest way to install this is to use a wheel (*.whl file) and install it via `pip install <your_whl_file>.whl`. You may have to add `<python dir>/Scripts` to your `%PATH%`. (Last tested version was: cx_Freeze-5.0-cp35-cp35m-win_amd64.whl)
 * **NSIS 3** (http://nsis.sourceforge.net/Main_Page) for creating the installer. Additional NSIS scripts are shipped with this project.
 
 Make sure these dependencies are available from your path.
@@ -72,7 +101,14 @@ Before make package - copy arduino to cura-build/
 
 ## Ubuntu/Linux
 
-cura-build can build AppImage packages of Cura.
+cura-build can build AppImage packages of Cura. The following dependencies are required:
+
+* `apt install git cmake gcc python3`
+* `python3 -m pip install numpy scipy pyserial pyqt5 sip trimesh shapely zeroconf numpy-stl`
+* **LibArcus** from https://github.com/Ultimaker/libArcus
+* **cx_Freeze** (https://pypi.python.org/pypi/cx_Freeze)
+  The easiest way to install this is to use a wheel (*.whl file) and install it via `pip install <your_whl_file>.whl`. You may have to add `<python dir>/Scripts` to your `PATH`.
+* **AppImageKit** from https://github.com/AppImage/AppImageKit
 
 To build, make sure these dependencies are installed, then clone this repository and run the following commands from your clone:
 

@@ -15,7 +15,7 @@ add_custom_command(
 
 add_custom_command(
     TARGET build_bundle POST_BUILD
-    COMMAND ${PYTHON_EXECUTABLE} setup.py build_exe
+    COMMAND ${Python3_EXECUTABLE} setup.py build_exe
     COMMENT "running cx_Freeze"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
 )
@@ -37,7 +37,7 @@ if(BUILD_OS_WINDOWS)
     add_custom_command(
         TARGET build_bundle POST_BUILD
         # NOTE: Needs testing here, whether CPACK_SYSTEM_NAME is working good for 64bit builds, too.
-        COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/packaging/patch_qt5.10_dialogplugin.py ${CMAKE_BINARY_DIR}/package
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/packaging/patch_qt5.10_dialogplugin.py ${CMAKE_BINARY_DIR}/package
         COMMENT "CURA-6074 Patching dialogplugin.dll in ${CMAKE_BINARY_DIR}/package"
     )
 endif()
@@ -83,11 +83,11 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Ultimaker Cura - 3D Printing Software")
 set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/packaging/cura_license)
 set(CPACK_PACKAGE_CONTACT "Ruben Dulek <r.dulek@ultimaker.com>")
 
-set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}.${CURA_VERSION_PATCH}")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${CURA_VERSION_MAJOR}.${CURA_VERSION_MINOR}")
+set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura master")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura master")
 
 # CPackNSIS
-set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
+set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL OFF)
 set(CPACK_NSIS_EXECUTABLES_DIRECTORY ".")
 set(CPACK_NSIS_INSTALLED_ICON_NAME "Cura.ico")
 set(CPACK_NSIS_MUI_ICON ${CMAKE_SOURCE_DIR}\\\\packaging\\\\cura.ico)   # note: fails with forward '/'
