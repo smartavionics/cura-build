@@ -1,6 +1,6 @@
 #! /bin/sh
 
-NAME=Cura-mb-master-`date +%Y%m%d`
+NAME=Cura-mb-master-macos-`date +%Y%m%d`
 
 rm -rf $NAME.dmg cura-mb-master.app
 
