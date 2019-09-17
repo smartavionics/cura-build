@@ -2,7 +2,7 @@ find_package(cx_freeze 5.0 REQUIRED)
 
 configure_file(${CMAKE_CURRENT_LIST_DIR}/setup_osx.py.in setup.py @ONLY)
 configure_file(${CMAKE_CURRENT_LIST_DIR}/Info.plist.in Info.plist @ONLY)
-configure_file(${CMAKE_CURRENT_LIST_DIR}/qt.conf qt.conf @ONLY)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/qt.conf.in qt.conf @ONLY)
 
 add_custom_command(
     TARGET packaging POST_BUILD
