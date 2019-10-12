@@ -86,6 +86,15 @@ def load_pyqt5_qtquick(finder, module):
     finder.IncludeModule("PyQt5._QOpenGLFunctions_2_0")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_2_1")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_4_1_Core")
+    finder.IncludeModule("PyQt5.sip")
+    qt_path = os.path.join(os.path.dirname(PyQt5.QtCore.__file__), "Qt", "bin")
+    required_qt_dlls = [
+        "Qt5Quick.dll",
+        "Qt5QuickTemplates2.dll",
+        "Qt5QuickControls2.dll",
+    ]
+    for file_name in required_qt_dlls:
+        finder.IncludeFiles(os.path.join(qt_path, file_name), file_name)
 
 hooks.load_PyQt5_QtQuick = load_pyqt5_qtquick
 
