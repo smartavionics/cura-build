@@ -1,6 +1,6 @@
 #! /bin/sh
 
-if [[ $(uname) == "Darwin" ]]; then
+if test "$(uname)" = "Darwin"; then
   export CURA_TARGET_OSX_VERSION=10.13
   . ../env_osx.sh
   unset CC
@@ -9,6 +9,8 @@ if [[ $(uname) == "Darwin" ]]; then
 else
   export CURA_HOME=/opt/cura
 fi
+
+echo "CURA_HOME is $CURA_HOME"
 
 PATH=$CURA_HOME/bin:$PATH \
 PYTHONPATH=$CURA_HOME/lib/python3/dist-packages \
