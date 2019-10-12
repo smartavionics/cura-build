@@ -124,7 +124,7 @@ hooks.load_shapely = load_shapely
 
 search_path = sys.path.copy()
 search_path.insert(1, "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.5/site-packages/")
-search_path.insert(2, "@CMAKE_PREFIX_PATH@/lib/python3.5/site-packages/")
+search_path.insert(2, "@CMAKE_PREFIX_PATH@/lib/site-packages/")
 
 # Dependencies are automatically detected, but it might need
 # fine tuning.
