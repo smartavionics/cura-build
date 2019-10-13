@@ -17,6 +17,7 @@ endif()
 ExternalProject_Add(CuraEngine
     GIT_REPOSITORY https://github.com/smartavionics/CuraEngine
     GIT_TAG origin/${CURAENGINE_BRANCH_OR_TAG}
+    STEP_TARGETS update
     #GIT_SHALLOW 1
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${EXTERNALPROJECT_INSTALL_PREFIX}
@@ -29,3 +30,5 @@ ExternalProject_Add(CuraEngine
 )
 
 SetProjectDependencies(TARGET CuraEngine)
+
+add_dependencies(update CuraEngine-update)
