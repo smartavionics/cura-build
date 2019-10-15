@@ -30,7 +30,7 @@ hooks.load_PyQt5_QtQuick = load_pyqt5_qtquick
 search_path = sys.path.copy()
 if os.path.exists("/etc/debian_version"):
     python_externalproject_dir = "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3/dist-packages/"
-    python_install_dir = "@CMAKE_INSTALL_PREFIX@/lib/python3/dist-packages/"
+    python_install_dir = "@CMAKE_INSTALL_PREFIX@/lib/python3.5"
 else:
     python_externalproject_dir = "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.5/site-packages/"
     python_install_dir = "@CMAKE_INSTALL_PREFIX@/lib/python3.5/site-packages/"
@@ -62,8 +62,8 @@ build_options = {
     ],
     "include_files": [
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine", ""),
-        ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/cura", "plugins"),
-        ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/uranium", "plugins"),
+        ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/cura/plugins", "plugins"),
+        ("@EXTERNALPROJECT_INSTALL_PREFIX@/lib/uranium/plugins", "plugins"),
         (os.path.join(python_externalproject_dir, "UM/Qt/qml/UM"), "qml/UM"),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/cura/resources", "resources"),
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/share/uranium/resources", "resources"),
