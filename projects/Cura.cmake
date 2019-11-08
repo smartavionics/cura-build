@@ -8,8 +8,8 @@ string(REPLACE ";" "," _cura_no_install_plugins "${CURA_NO_INSTALL_PLUGINS}")
 ExternalProject_Add(Cura
     GIT_REPOSITORY https://github.com/smartavionics/Cura
     GIT_TAG origin/${CURA_BRANCH_OR_TAG}
-    STEP_TARGETS update
     #GIT_SHALLOW 1
+    STEP_TARGETS update
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNALPROJECT_INSTALL_PREFIX}
                -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
                -DURANIUM_SCRIPTS_DIR=
