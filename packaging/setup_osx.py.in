@@ -19,6 +19,7 @@ def load_pyqt5_qtquick(finder, module):
     finder.IncludeModule("PyQt5.QtWebSockets")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_2_0")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_4_1_Core")
+    finder.IncludeModule("PyQt5.sip")
 
 hooks.load_PyQt5_QtQuick = load_pyqt5_qtquick
 
