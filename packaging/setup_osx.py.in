@@ -41,6 +41,7 @@ build_options = {
         "uuid",
         "serial",
         "zeroconf",
+        "netifaces",
         "requests",
         "idna",
         "UM",
