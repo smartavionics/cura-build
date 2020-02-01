@@ -40,10 +40,14 @@ param (
   [string]$CuraMsiProductGuid = "",
   [string]$CuraMsiUpgradeGuid = "",
 
-  [boolean]$IsInteractive = $true
+  [boolean]$IsInteractive = $true,
+  [boolean]$BindSshVolume = $false
 )
 
+$ErrorActionPreference = "Stop"
+
 $outputDirName = "windows-installers"
+$buildOutputDirName = "build"
 
 New-Item $outputDirName -ItemType "directory" -Force
 $repoRoot = Join-Path $PSScriptRoot -ChildPath "..\.." -Resolve
@@ -68,6 +72,7 @@ elseif ($CuraWindowsInstallerType -eq "MSI") {
     Write-Error `
       -Message "Missing CuraMsiProductGuid or CuraMsiUpgradeGuid." `
       -Category InvalidArgument
+    exit 1
   }
 }
 else {
@@ -77,12 +82,23 @@ else {
   exit 1
 }
 
-$dockerExtraArgs = ""
+$dockerExtraArgs = New-Object Collections.Generic.List[String]
 if ($IsInteractive) {
-  $dockerExtraArgs = "-it"
+  $dockerExtraArgs.Add("-it")
 }
 
-& docker.exe run $dockerExtraArgs --rm `
+if ($BindSshVolume) {
+  $oldPath = pwd
+  cd ~
+  $homePath = pwd
+  cd $oldPath
+  $sshPath = "$homePath\.ssh"
+  $dockerExtraArgs.Add("--volume")
+  $dockerExtraArgs.Add("${sshPath}:C:\Users\ContainerAdministrator\.ssh")
+}
+
+& docker.exe run $dockerExtraArgs `
+  --rm `
   --volume ${repoRoot}:C:\cura-build-src `
   --volume ${outputRoot}:C:\cura-build-output `
   --env CURA_BUILD_SRC_PATH=C:\cura-build-src `
@@ -105,5 +121,7 @@ if ($IsInteractive) {
   --env CURA_DEBUG_MODE=$CURA_DEBUG_MODE `
   --env CURAENGINE_ENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS=$CURAENGINE_ENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS `
   --env CPACK_GENERATOR=$CPACK_GENERATOR `
+  --env CURA_MSI_PRODUCT_GUID=$CuraMsiProductGuid `
+  --env CURA_MSI_UPGRADE_GUID=$CuraMsiUpgradeGuid `
   $DockerImage `
   powershell.exe -Command cmd /c "C:\cura-build-src\scripts\windows\build_in_docker_vs2015.cmd"
