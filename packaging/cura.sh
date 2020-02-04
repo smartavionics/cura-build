@@ -2,6 +2,10 @@
 
 scriptdir=$(dirname $0)
 
+if [ -f /usr/lib/arm-linux-gnueabihf/libGLESv2.so ]; then
+  export QT_XCB_GL_INTEGRATION=xcb_egl
+fi
+
 export PYTHONPATH=$scriptdir/lib/python3.5
 export QT_PLUGIN_PATH=$scriptdir/qt/plugins
 export QML2_IMPORT_PATH=$scriptdir/qt/qml
