@@ -102,12 +102,20 @@ def load_pyqt5_qtnetwork(finder, module):
     finder.IncludeModule("PyQt5.QtCore")
 
     qt_path = os.path.join(os.path.dirname(PyQt5.QtCore.__file__), "Qt", "bin")
-    required_ssl_files = [
-        "libeay32.dll",
-        "ssleay32.dll",
-        "libcrypto-1_1-x64.dll",
-        "libssl-1_1-x64.dll",
-    ]
+    if platform.architecture()[0] == "32bit":
+        required_ssl_files = [
+            "libeay32.dll",
+            "ssleay32.dll",
+            "libcrypto-1_1.dll",
+            "libssl-1_1.dll",
+        ]
+    else:
+        required_ssl_files = [
+            "libeay32.dll",
+            "ssleay32.dll",
+            "libcrypto-1_1-x64.dll",
+            "libssl-1_1-x64.dll",
+        ]
     for file_name in required_ssl_files:
         finder.IncludeFiles(os.path.join(qt_path, file_name), file_name)
 

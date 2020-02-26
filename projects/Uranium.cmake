@@ -1,4 +1,4 @@
-find_package(PythonInterp 3.5.0 REQUIRED)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 if(NOT BUILD_OS_WINDOWS)
     # Only ask for Qt5 where it is actually built via cura-build-environment.
     # On Windows we are using PyQt5 to provide our libraries prebuilt.
