@@ -158,6 +158,7 @@ build_options = {
         "cura",
         "stl",
         "shapely",
+        "netifaces",
         "networkx",
         "trimesh",
         "trimesh.resources",
