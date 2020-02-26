@@ -66,7 +66,6 @@ build_options = {
         "logging.config",
         "logging.handlers",
         "resource",
-        "contextlib",
     ],
     "include_files": [
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine", ""),
