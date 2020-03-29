@@ -37,6 +37,11 @@ else:
 search_path.insert(1, python_externalproject_dir)
 search_path.insert(2, python_install_dir)
 
+import site
+search_path.remove(site.USER_SITE)
+
+print(search_path, file=sys.stderr)
+
 # Dependencies are automatically detected, but it might need
 # fine tuning.
 build_options = {
