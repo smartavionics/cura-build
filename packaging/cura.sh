@@ -15,4 +15,12 @@ export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 # Use the openssl.cnf packaged in the AppImage
 export OPENSSL_CONF="$scriptdir/openssl.cnf"
 
+MESA_LIB_DIR="/opt/mesa-20.1/lib/arm-linux-gnueabihf"
+
+if [ -d "$MESA_LIB_DIR" ]; then
+  echo "Found $MESA_LIB_DIR"
+  export LD_LIBRARY_PATH="$MESA_LIB_DIR"
+  export MESA_GLES_VERSION_OVERRIDE="3.2"
+fi
+
 cura "$@"
