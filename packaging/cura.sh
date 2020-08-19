@@ -15,7 +15,7 @@ export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 # Use the openssl.cnf packaged in the AppImage
 export OPENSSL_CONF="$scriptdir/openssl.cnf"
 
-MESA_LIB_DIR="/opt/mesa-20.1/lib/arm-linux-gnueabihf"
+MESA_LIB_DIR="/opt/mesa/lib/arm-linux-gnueabihf"
 
 if [ -d "$MESA_LIB_DIR" ]; then
   echo "Found $MESA_LIB_DIR"
