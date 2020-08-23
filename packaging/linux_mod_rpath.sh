@@ -11,7 +11,7 @@ PACKAGE_DIR="$1"
 
 pushd "${PACKAGE_DIR}" > /dev/null
 
-all_files="$(find . -type f -name cura -or -name CuraEngine -or -name AppRun -or -name '*.so*')"
+all_files="$(find . -type f -name cura -or -name CuraEngine -or -name '*.so*')"
 for filename in ${all_files}
 do
 #    # Skip files that don't exist
