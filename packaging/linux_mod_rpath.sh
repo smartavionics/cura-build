@@ -22,6 +22,10 @@ do
     is_elf="$(file -b "${filename}" | grep '^ELF')"
     if [ -z "${is_elf}" ]; then
         continue
+
+    if [ ! -w "${filename}" ]; then
+        echo "Making ${filename} writable"
+        chmod +w "${filename}"
     fi
 
     # Change rpath.
