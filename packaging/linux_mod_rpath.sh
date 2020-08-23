@@ -11,17 +11,22 @@ PACKAGE_DIR="$1"
 
 pushd "${PACKAGE_DIR}" > /dev/null
 
-all_files="$(find . -type f)"
+all_files="$(find . -type f -name cura -or -name CuraEngine -or -name AppRun -or -name '*.so*')"
 for filename in ${all_files}
 do
-    # Skip files that don't exist
-    if [ ! -f "${filename}" ]; then
-        continue
-    fi
-    # Look for ELFs only
-    is_elf="$(file -b "${filename}" | grep '^ELF')"
-    if [ -z "${is_elf}" ]; then
-        continue
+#    # Skip files that don't exist
+#    if [ ! -f "${filename}" ]; then
+#        continue
+#    fi
+#    # Look for ELFs only
+#    is_elf="$(file -b "${filename}" | grep '^ELF')"
+#    if [ -z "${is_elf}" ]; then
+#        continue
+#    fi
+
+    if [ ! -w "${filename}" ]; then
+        echo "Making ${filename} writable"
+        chmod +w "${filename}"
     fi
 
     # Change rpath.
