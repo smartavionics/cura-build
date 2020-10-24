@@ -169,7 +169,6 @@ build_options = {
         "logging",
         "logging.config",
         "logging.handlers",
-        "resource",
     ],
     "include_files": [
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine.exe", ""),
