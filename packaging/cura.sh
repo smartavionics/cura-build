@@ -2,7 +2,7 @@
 
 scriptdir=$(dirname $0)
 
-if [ -f /usr/lib/arm-linux-gnueabihf/libGLESv2.so ]; then
+if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
   export QT_XCB_GL_INTEGRATION=xcb_egl
 fi
 
