@@ -71,6 +71,9 @@ build_options = {
         "logging",
         "logging.config",
         "logging.handlers",
+        "Arcus_sip",
+        "Savitar_sip",
+        "pynest2d_sip",
     ],
     "include_files": [
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine", ""),
