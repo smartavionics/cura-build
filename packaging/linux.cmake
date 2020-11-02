@@ -74,7 +74,9 @@ set(APPIMAGE_FILENAME "Ultimaker_Cura-${CURA_VERSION}.AppImage")
 
 # architecture detection in appimagetool is unreliable so explicitly specify the required architecture
 if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
-    set(_appimage_arch arm) # not armhf
+    set(_appimage_arch armhf)
+elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
+    set(_appimage_arch aarch64)
 else()
     set(_appimage_arch x86_64)
 endif()
