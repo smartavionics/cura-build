@@ -70,15 +70,16 @@ add_custom_command(
     COMMENT "Copying AppRun executable..."
 )
 
-set(APPIMAGE_FILENAME "Ultimaker_Cura-${CURA_VERSION}.AppImage")
-
 # architecture detection in appimagetool is unreliable so explicitly specify the required architecture
 if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
-    set(_appimage_arch armhf)
+    set(_appimage_arch arm)
+    set(APPIMAGE_FILENAME "Cura-${CURA_BRANCH_OR_TAG}-armhf.AppImage")
 elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
-    set(_appimage_arch aarch64)
+    set(_appimage_arch arm_aarch64)
+    set(APPIMAGE_FILENAME "Cura-${CURA_BRANCH_OR_TAG}-aarch64.AppImage")
 else()
     set(_appimage_arch x86_64)
+    set(APPIMAGE_FILENAME "Cura-${CURA_BRANCH_OR_TAG}-x86_64.AppImage")
 endif()
 
 add_custom_command(
@@ -86,4 +87,5 @@ add_custom_command(
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${APPIMAGE_FILENAME}
     COMMAND env "ARCH=${_appimage_arch}" ${APPIMAGEKIT_APPIMAGETOOL_EXECUTABLE} -n --appimage-extract-and-run ${CMAKE_BINARY_DIR}/package ${APPIMAGE_FILENAME}
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Making ${APPIMAGE_FILENAME}..."
 )
