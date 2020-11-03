@@ -4,6 +4,16 @@ scriptdir=$(dirname $0)
 
 if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
   export QT_XCB_GL_INTEGRATION=xcb_egl
+  if test -x /sbin/ldconfig; then
+    if /sbin/ldconfig -p | grep -q libGLESv2; then
+      echo "Found libGLESv2"
+    else
+      mesage="Can't find libGLESv2, you need to do: sudo apt-get install libgles-dev"
+      echo "$message"
+      xmessage "$message"
+      exit 1
+    fi
+  fi
 fi
 
 export PYTHONPATH="$scriptdir/lib/python3.5"
