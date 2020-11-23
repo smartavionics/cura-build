@@ -83,7 +83,7 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/plugins", "qt/plugins"),
         ("@CMAKE_PREFIX_PATH@/lib/qml", "qt/qml"),
         ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", ""),    # For shapely
-        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", ""),  # For shapely
+        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", "libgeos_c-1.so.1"),  # For shapely 1.7.1
         ("@CMAKE_PREFIX_PATH@/lib/libopenctm.so", ""), # For opening .CTM files
         ("@CMAKE_PREFIX_PATH@/openssl.cnf", ""),
     ],
