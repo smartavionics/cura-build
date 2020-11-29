@@ -19,7 +19,11 @@ include(GetFromEnvironmentOrCache)
 include(SetProjectDependencies)
 
 option(BUILD_PACKAGE "Create a package with the build of Cura" ON)
-option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" OFF)
+if(BUILD_OS_OSX)
+  option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" ON)
+else()
+  option(SIGN_PACKAGE "Perform signing of the created package. Implies BUILD_PACKAGE" OFF)
+endif()
 
 set(CURA_BUILDTYPE          "" CACHE STRING "Build type of Cura, eg. 'testing'")
 set(CURA_NO_INSTALL_PLUGINS "" CACHE STRING "A list of plugins to exclude from installation, should be separated by ';'.")
