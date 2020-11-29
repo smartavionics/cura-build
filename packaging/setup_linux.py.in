@@ -71,6 +71,7 @@ build_options = {
         "logging",
         "logging.config",
         "logging.handlers",
+        "sip5",
     ],
     "include_files": [
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine", ""),
@@ -82,7 +83,7 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/plugins", "qt/plugins"),
         ("@CMAKE_PREFIX_PATH@/lib/qml", "qt/qml"),
         ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", ""),    # For shapely
-        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", ""),  # For shapely
+        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", "libgeos_c-1.so.1"),  # For shapely 1.7.1
         ("@CMAKE_PREFIX_PATH@/lib/libopenctm.so", ""), # For opening .CTM files
         ("@CMAKE_PREFIX_PATH@/openssl.cnf", ""),
     ],
@@ -97,6 +98,7 @@ build_options = {
     "bin_excludes": [
         "ld-linux-x86-64.so.2",
         "ld-linux-armhf.so.3",
+        "ld-linux-aarch64.so.1",
         "libarmmem-v7l.so",
         "linux-vdso.so.1",
         "libpthread.so.0",

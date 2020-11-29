@@ -1,9 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
 scriptdir=$(dirname $0)
 
-if [ -f /usr/lib/arm-linux-gnueabihf/libGLESv2.so ]; then
+if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
   export QT_XCB_GL_INTEGRATION=xcb_egl
+  if test -x /sbin/ldconfig; then
+    if /sbin/ldconfig -p | grep -q libGLESv2; then
+      echo "Found libGLESv2"
+    else
+      mesage="Can't find libGLESv2, you need to do: sudo apt-get install libgles-dev"
+      echo "$message"
+      xmessage "$message"
+      exit 1
+    fi
+  fi
 fi
 
 export PYTHONPATH="$scriptdir/lib/python3.5"
@@ -15,7 +25,11 @@ export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 # Use the openssl.cnf packaged in the AppImage
 export OPENSSL_CONF="$scriptdir/openssl.cnf"
 
-MESA_LIB_DIR="/opt/mesa/lib/arm-linux-gnueabihf"
+if [ "$HOSTTYPE" == "arm" ]; then
+	MESA_LIB_DIR="/opt/mesa/lib/arm-linux-gnueabihf"
+else
+	MESA_LIB_DIR="/opt/mesa/lib/$HOSTTYPE-linux-gnu"
+fi
 
 if [ -d "$MESA_LIB_DIR" ]; then
   echo "Found $MESA_LIB_DIR"
