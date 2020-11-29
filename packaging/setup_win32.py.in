@@ -86,7 +86,6 @@ def load_pyqt5_qtquick(finder, module):
     finder.IncludeModule("PyQt5._QOpenGLFunctions_2_0")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_2_1")
     finder.IncludeModule("PyQt5._QOpenGLFunctions_4_1_Core")
-    finder.IncludeModule("PyQt5.sip")
     qt_path = os.path.join(os.path.dirname(PyQt5.QtCore.__file__), "Qt", "bin")
     required_qt_dlls = [
         "Qt5Quick.dll",
@@ -135,6 +134,7 @@ hooks.load_shapely = load_shapely
 search_path = sys.path.copy()
 search_path.insert(1, "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.5/site-packages/")
 search_path.insert(2, "@CMAKE_PREFIX_PATH@/lib/site-packages/")
+search_path.insert(3, "@CMAKE_PREFIX_PATH@/lib/site-packages/PyQt5")
 
 # Dependencies are automatically detected, but it might need
 # fine tuning.
@@ -169,6 +169,8 @@ build_options = {
         "logging",
         "logging.config",
         "logging.handlers",
+        "sip5",
+        "PyQt5.sip",
     ],
     "include_files": [
         ("@EXTERNALPROJECT_INSTALL_PREFIX@/bin/CuraEngine.exe", ""),
