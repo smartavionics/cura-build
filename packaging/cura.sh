@@ -16,7 +16,7 @@ if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
   fi
 fi
 
-export PYTHONPATH="$scriptdir/lib/python3.5"
+export PYTHONPATH="$scriptdir/lib/python3.8"
 export QT_PLUGIN_PATH="$scriptdir/qt/plugins"
 export QML2_IMPORT_PATH="$scriptdir/qt/qml"
 export QT_QPA_FONTDIR=/usr/share/fonts

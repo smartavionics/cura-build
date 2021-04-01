@@ -14,7 +14,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ROOT_DIR="${SCRIPT_DIR}/../../.."
 
 # Cura release configurations
-CURA_BUILD_ENV_DOCKER_IMAGE="${CURA_BUILD_ENV_DOCKER_IMAGE:-ultimaker/cura-build-environment:python3.7-debian-latest}"
+CURA_BUILD_ENV_DOCKER_IMAGE="${CURA_BUILD_ENV_DOCKER_IMAGE:-ultimaker/cura-build-environment:centos7-master}"
 
 CURA_BRANCH_OR_TAG="${CURA_BRANCH_OR_TAG:-master}"
 URANIUM_BRANCH_OR_TAG="${URANIUM_BRANCH_OR_TAG:-master}"
@@ -34,9 +34,10 @@ CURA_NO_INSTALL_PLUGINS="${CURA_NO_INSTALL_PLUGINS}"
 CURA_CLOUD_API_ROOT="${CURA_CLOUD_API_ROOT:-https://api.ultimaker.com}"
 CURA_CLOUD_API_VERSION="${CURA_CLOUD_API_VERSION:-1}"
 CURA_CLOUD_ACCOUNT_API_ROOT="${CURA_CLOUD_ACCOUNT_API_ROOT:-https://account.ultimaker.com}"
+CURA_MARKETPLACE_ROOT="${CURA_MARKETPLACE_ROOT:-https://marketplace.ultimaker.com}"
+CURA_DIGITAL_FACTORY_URL="${CURA_DIGITAL_FACTORY_URL:-https://digitalfactory.ultimaker.com}"
 
 CURA_ENABLE_DEBUG_MODE="${CURA_ENABLE_DEBUG_MODE:-ON}"
-CURA_ENABLE_CURAENGINE_EXTRA_OPTIMIZATION_FLAGS="${CURA_ENABLE_CURAENGINE_EXTRA_OPTIMIZATION_FLAGS:-ON}"
 
 if [ -t 0 ]; then
   IS_INTERACTIVE=yes
@@ -59,7 +60,7 @@ if [ "${IS_INTERACTIVE}" = "yes" ]; then
 fi
 
 if [ "${BIND_SSH_VOLUME}" = "yes" ]; then
-  DOCKER_EXTRA_ARGS="${DOCKER_EXTRA_ARGS} -v $HOME/.ssh:/root/.ssh:ro"
+  DOCKER_EXTRA_ARGS="${DOCKER_EXTRA_ARGS} -v $HOME/.ssh:/home/ultimaker/.ssh:ro"
 fi
 
 # Always pull the image to make sure that we have the latest
@@ -70,12 +71,11 @@ set -e
 # Run docker to create the AppImage
 #
 # Environment variables:
-#  - CURA_BUILD_OUTPUT_DIR : Where the build directory and AppImages will be put inside docker container
+#  - CURA_APPIMAGES_OUTPUT_DIR : Where AppImages will be put inside docker container
 #
 docker run \
   ${DOCKER_EXTRA_ARGS} \
-  --rm \
-  --user 1000:1000 \
+  --user $(id -u):$(id -g) \
   --volume "$(pwd)":/home/ultimaker/src \
   --env CURA_BUILD_OUTPUT_DIR=/home/ultimaker/src/output \
   --env CURA_BRANCH_OR_TAG="${CURA_BRANCH_OR_TAG}" \
@@ -93,9 +93,11 @@ docker run \
   --env CURA_CLOUD_API_ROOT="${CURA_CLOUD_API_ROOT}" \
   --env CURA_CLOUD_API_VERSION="${CURA_CLOUD_API_VERSION}" \
   --env CURA_CLOUD_ACCOUNT_API_ROOT="${CURA_CLOUD_ACCOUNT_API_ROOT}" \
+  --env CURA_MARKETPLACE_ROOT="${CURA_MARKETPLACE_ROOT}" \
+  --env CURA_DIGITAL_FACTORY_URL="${CURA_DIGITAL_FACTORY_URL}" \
   --env CURA_ENABLE_DEBUG_MODE="${CURA_ENABLE_DEBUG_MODE}" \
-  --env CURA_ENABLE_CURAENGINE_EXTRA_OPTIMIZATION_FLAGS="${CURA_ENABLE_CURAENGINE_EXTRA_OPTIMIZATION_FLAGS}" \
+  --env CURA_ENABLE_CURAENGINE_EXTRA_OPTIMIZATION_FLAGS="ON" \
   "${CURA_BUILD_ENV_DOCKER_IMAGE}" \
-  /home/ultimaker/src/scripts/python3.7/linux/build_in_docker.sh
+  /home/ultimaker/src/docker/linux/build_in_docker.sh
 
 cd "${__old_pwd}"

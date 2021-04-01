@@ -123,11 +123,11 @@ if ($BindSshVolume) {
   --env CURA_CLOUD_API_VERSION=$CuraCloudApiVersion `
   --env CURA_CLOUD_ACCOUNT_API_ROOT=$CuraCloudAccountApiRoot `
   --env CURA_MARKETPLACE_ROOT=$MarketplaceRoot `
-  --env CURA_DIGITAL_FACTORY_URL=$DigitalFactoryURL
+  --env CURA_DIGITAL_FACTORY_URL=$DigitalFactoryURL `
   --env CURA_DEBUG_MODE=$CURA_DEBUG_MODE `
   --env CURAENGINE_ENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS=$CURAENGINE_ENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS `
   --env CPACK_GENERATOR=$CPACK_GENERATOR `
   --env CURA_MSI_PRODUCT_GUID=$CuraMsiProductGuid `
   --env CURA_MSI_UPGRADE_GUID=$CuraMsiUpgradeGuid `
   $DockerImage `
-  powershell.exe -Command cmd /c "C:\cura-build-src\scripts\python3.5\windows\build_in_docker_vs2015.cmd"
+  powershell.exe -Command cmd /c "C:\cura-build-src\scripts\python3.8\windows\build_in_docker_vs2015.cmd"
