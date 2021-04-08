@@ -12,9 +12,9 @@ def load_scipy(finder, module):
 hooks.load_scipy = load_scipy
 
 search_path = sys.path.copy()
-if os.path.exists("/etc/debian_version"):
+if os.path.exists("/etc/debian_versionXXX"):
     python_externalproject_dir = "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3/dist-packages/"
-    python_install_dir = "@CMAKE_INSTALL_PREFIX@/lib/python3.5"
+    python_install_dir = "@CMAKE_INSTALL_PREFIX@/lib/python3.8"
 else:
     python_externalproject_dir = "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.8/site-packages/"
     python_install_dir = "@CMAKE_INSTALL_PREFIX@/lib/python3.8/site-packages/"
@@ -71,10 +71,10 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/libbz2.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libcrypto.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libffi.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", ""),    # For shapely
-        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", ""),  # For shapely
+        ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", "libgeos.so.3.7.3"),    # For shapely
+        ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", "libgeos_c-1.so.1"),  # For shapely
         ("@CMAKE_PREFIX_PATH@/lib/liblzma.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/libnlopt.so", ""),
+        ("@CMAKE_PREFIX_PATH@/lib/libnlopt.so", "libnlopt.so.0"),
         ("@CMAKE_PREFIX_PATH@/lib/libopenblas.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libopenctm.so", ""), # For opening .CTM files
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Charts.so", ""),
@@ -100,7 +100,7 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/libQt5QuickTest.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5QuickWidgets.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5RemoteObjects.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/libQt5SerialBus.so", ""),
+        #("@CMAKE_PREFIX_PATH@/lib/libQt5SerialBus.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Sql.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Svg.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Test.so", ""),
@@ -109,7 +109,7 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Xml.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libssl.so", ""),
         ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/numpy.libs", "lib/numpy/core"), # Due to a bug in cx_Freeze, these Numpy extensions don't get packaged properly. See https://github.com/marcelotduarte/cx_Freeze/issues/653
-        ("@CMAKE_PREFIX_PATH@/openssl.cnf", ""),
+        #("@CMAKE_PREFIX_PATH@/openssl.cnf", ""),
     ],
     "optimize": 1,
     "bin_path_includes": [
