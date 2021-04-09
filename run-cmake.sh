@@ -13,7 +13,7 @@ fi
 echo "CURA_HOME is $CURA_HOME"
 
 PATH=$CURA_HOME/bin:$PATH \
-PYTHONPATH=$CURA_HOME/lib/python3/dist-packages \
+PYTHONPATH=$CURA_HOME/lib/python3.8 \
 CURA_BRANCH_OR_TAG=mb-master \
 CURAENGINE_BRANCH_OR_TAG=mb-master \
 URANIUM_BRANCH_OR_TAG=mb-master \
