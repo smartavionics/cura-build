@@ -111,8 +111,9 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Widgets.so", "libQt5Widgets.so.5"),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Xml.so", "libQt5Xml.so.5"),
         ("@CMAKE_PREFIX_PATH@/lib/libssl.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/numpy.libs", "lib/numpy/core"), # Due to a bug in cx_Freeze, these Numpy extensions don't get packaged properly. See https://github.com/marcelotduarte/cx_Freeze/issues/653
         #("@CMAKE_PREFIX_PATH@/openssl.cnf", ""),
+    ] + [ ] if "@CMAKE_SYSTEM_PROCESSOR@" == "armv7l" else [
+        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/numpy.libs", "lib/numpy/core"), # Due to a bug in cx_Freeze, these Numpy extensions don't get packaged properly. See https://github.com/marcelotduarte/cx_Freeze/issues/653
     ],
     "optimize": 1,
     "bin_path_includes": [
