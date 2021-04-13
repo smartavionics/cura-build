@@ -27,7 +27,7 @@ search_path = sys.path.copy()
 search_path.insert(1, "@EXTERNALPROJECT_INSTALL_PREFIX@/lib/python3.8/site-packages/")
 search_path.insert(2, "@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/")
 search_path.insert(3, "@CMAKE_PREFIX_PATH@/lib")
-search_path.insert(4, "@CMAKE_PREFIX_PATH@/lib/python3.5/site-packages/PyQt5")
+search_path.insert(4, "@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/PyQt5")
 
 # Dependencies are automatically detected, but it might need
 # fine tuning.
@@ -79,7 +79,7 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/libgeos.dylib", "lib/python3.8/shapely/.dylibs/libgeos.dylib"),
         ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.1.dylib", "lib/python3.8/shapely/.dylibs/libgeos_c.1.dylib"),
         ("@CMAKE_PREFIX_PATH@/lib/libopenctm.dylib", ""),  # For opening .CTM files
-        ("@CMAKE_BINARY_DIR@/qt.conf" "")
+        ("@CMAKE_BINARY_DIR@/qt.conf" ""),
         ("@CMAKE_PREFIX_PATH@/lib/libopenblas.dylib", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libnlopt.dylib", ""),
         ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/numpy/.dylibs/libgfortran.3.dylib", ""),
