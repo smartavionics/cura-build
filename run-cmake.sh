@@ -2,6 +2,7 @@
 
 if test "$(uname)" = "Darwin"; then
   export CURA_TARGET_OSX_VERSION=10.13
+  export CURA_OSX_SDK_VERSION=10.14
   . ../env_osx.sh
   unset CC
   unset CXX
