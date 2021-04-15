@@ -69,8 +69,9 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/plugins", "qt/plugins"),
         ("@CMAKE_PREFIX_PATH@/lib/qml", "qt/qml"),
         ("@CMAKE_PREFIX_PATH@/lib/libbz2.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/libcrypto.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/libffi.so", ""),
+        ("@CMAKE_PREFIX_PATH@/lib/libcrypto.so", "libcrypto.so.1.1"),
+        ("@CMAKE_PREFIX_PATH@/lib/libffi.so", "libffi.so.7"),
+        ("@CMAKE_PREFIX_PATH@/lib/libpython3.8.so.1.0", ""),
         ("@CMAKE_PREFIX_PATH@/lib/libgeos.so", "libgeos.so.3.7.3"),    # For shapely
         ("@CMAKE_PREFIX_PATH@/lib/libgeos_c.so", "libgeos_c-1.so.1"),  # For shapely
         ("@CMAKE_PREFIX_PATH@/lib/liblzma.so", ""),
@@ -153,6 +154,17 @@ build_options = {
         "libXfixes.so.3",
         "libX11-xcb.so.1",
         "libX11.so.6",
+        "libxcb-icccm.so.4",
+        "libxcb-image.so.0",
+        "libxcb-keysyms.so.1",
+        "libxcb-randr.so.0",
+        "libxcb-render.so.0",
+        "libxcb-render-util.so.0",
+        "libxcb-shape.so.0",
+        "libxcb-shm.so.0",
+        "libxcb-util.so.0",
+        "libxcb-xinerama.so.0",
+        "libxcb-xkb.so.1",
         "libxcb-glx.so.0",
         "libxcb-dri2.so.0",
         "libxcb-dri3.so.0",
@@ -165,6 +177,7 @@ build_options = {
         "libwayland-client.so.0",
         "libwayland-server.so.0",
         "libxkbcommon.so.0",
+        "libxkbcommon-x11.so.0",
         "libmirclient.so.9",
         "libmircommon.so.7",
         "libmircore.so.1",
@@ -223,6 +236,10 @@ build_options = {
         "libQt5WebView.so.5",
         "libQt5Widgets.so.5",
         "libQt5Xml.so.5",
+        "libpython3.8.so.1.0",
+        "libffi.so.7",
+        "libcrypto.so.1.1",
+        "libfreetype.so.6",
     ]
 }
 
