@@ -8,7 +8,7 @@ add_custom_command(
 
 add_custom_command(
     TARGET signing PRE_BUILD
-    COMMAND ${CMAKE_CURRENT_LIST_DIR}/sign_cura_macOS.sh
+    COMMAND env "codesign_identity=${OSX_CODESIGN_IDENTITY}" ${CMAKE_CURRENT_LIST_DIR}/sign_cura_macOS.sh
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/build
 )
 
