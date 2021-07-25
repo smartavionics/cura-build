@@ -29,6 +29,7 @@ ExternalProject_Add(CuraEngine
                -DCURA_ENGINE_VERSION=mb-master-YYYYMMDD
                -DENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS=${CURAENGINE_ENABLE_MORE_COMPILER_OPTIMIZATION_FLAGS}
                -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
+               -DCMAKE_CXX_STANDARD=17
                ${extra_cmake_args}
 )
 
