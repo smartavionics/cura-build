@@ -112,13 +112,17 @@ build_options = {
         ("@CMAKE_PREFIX_PATH@/lib/libQt5WebView.so", "libQt5WebView.so.5"),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Widgets.so", "libQt5Widgets.so.5"),
         ("@CMAKE_PREFIX_PATH@/lib/libQt5Xml.so", "libQt5Xml.so.5"),
-        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/scipy.libs/libopenblasp-r0-085ca80a.3.9.so", ""),
-        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/scipy.libs/libgfortran-ed201abd.so.3.0.0", ""),
-    ] + ([ ] if "@CMAKE_SYSTEM_PROCESSOR@" == "armv7l" else [
+    ] + ([ ] if "@CMAKE_SYSTEM_PROCESSOR@" != "aarch64" else [
+        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/scipy.libs/libopenblasp-r0-d8c993c9.3.9.so", ""),
+        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/scipy.libs/libgfortran-daac5196.so.5.0.0", ""),
         ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/numpy.libs", "lib/numpy/core"), # Due to a bug in cx_Freeze, these Numpy extensions don't get packaged properly. See https://github.com/marcelotduarte/cx_Freeze/issues/653
+    ]) + ([ ] if "@CMAKE_SYSTEM_PROCESSOR@" != "armv7l" else [
     ]) + ([ ] if "@CMAKE_SYSTEM_PROCESSOR@" != "x86_64" else [
         ("/usr/lib/x86_64-linux-gnu/libpng12.so.0", ""), # temporarily required until Qt is rebuilt
         ("/usr/lib/x86_64-linux-gnu/libpng16.so.16", ""), # required for older systems?
+        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/scipy.libs/libopenblasp-r0-085ca80a.3.9.so", ""),
+        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/scipy.libs/libgfortran-ed201abd.so.3.0.0", ""),
+        ("@CMAKE_PREFIX_PATH@/lib/python3.8/site-packages/numpy.libs", "lib/numpy/core"), # Due to a bug in cx_Freeze, these Numpy extensions don't get packaged properly. See https://github.com/marcelotduarte/cx_Freeze/issues/653
     ]) + ([
         ("@CMAKE_PREFIX_PATH@/lib/libcrypto.so", "libcrypto.so.1.1"),
         ("@CMAKE_PREFIX_PATH@/lib/libssl.so", ""),
