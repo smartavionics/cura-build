@@ -1,5 +1,5 @@
 
-call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64 8.1
+call "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 8.1
 
 set INSTALL_DIR=%HOMEDRIVE%%HOMEPATH%\cura\inst
 set INSTALL_DIR_UNIX=%HOMEDRIVE%/Users/%USERNAME%/cura/inst
