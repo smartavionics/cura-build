@@ -174,6 +174,8 @@ build_options = {
         "libxcb-shape.so.0",
         "libxcb-shm.so.0",
         "libxcb-util.so.0",
+        "libxcb-util.so.1",
+        "libxcb-xinput.so.0",
         "libxcb-xinerama.so.0",
         "libxcb-xkb.so.1",
         "libxcb-glx.so.0",
