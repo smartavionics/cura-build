@@ -47,4 +47,11 @@ export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 # Use the openssl.cnf packaged in the AppImage
 export OPENSSL_CONF="$scriptdir/openssl.cnf"
 
-cura "$@"
+if [ -n "$CURA_GDB" ]; then
+  PP="$PYTHONPATH"
+  unset PYTHONPATH
+  unset PYTHONHOME
+  $CURA_GDB -ex "set env PYTHONPATH = \"$PP\"" "$scriptdir/cura"
+else
+  cura "$@"
+fi
