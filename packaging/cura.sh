@@ -14,6 +14,28 @@ if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
       exit 1
     fi
   fi
+
+  if [ "$HOSTTYPE" == "arm" ]; then
+    MESA_LIB_DIR="/opt/mesa/lib/arm-linux-gnueabihf"
+  else
+    MESA_LIB_DIR="/opt/mesa/lib/$HOSTTYPE-linux-gnu"
+  fi
+
+  if [ -d "$MESA_LIB_DIR" ]; then
+    echo "Found $MESA_LIB_DIR"
+    export LD_LIBRARY_PATH="$MESA_LIB_DIR"
+    echo "Forcing GLES version to 3.2"
+    export MESA_GLES_VERSION_OVERRIDE="3.2"
+  elif test -x /usr/bin/glxinfo; then
+    if /usr/bin/glxinfo -B | grep -q -E "    Version: ([2-9][0-9])"; then
+      echo "Found Mesa version 20 or higher"
+      echo "Forcing GLES version to 3.2"
+      export MESA_GLES_VERSION_OVERRIDE="3.2"
+    fi
+  else
+    message = "Can't find glxinfo to test installed Mesa version, please do: sudo apt-get install mesa-utils"
+    echo "$message"
+  fi
 fi
 
 export PYTHONPATH="$scriptdir/lib/python3.8"
@@ -24,17 +46,5 @@ export QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 
 # Use the openssl.cnf packaged in the AppImage
 export OPENSSL_CONF="$scriptdir/openssl.cnf"
-
-if [ "$HOSTTYPE" == "arm" ]; then
-	MESA_LIB_DIR="/opt/mesa/lib/arm-linux-gnueabihf"
-else
-	MESA_LIB_DIR="/opt/mesa/lib/$HOSTTYPE-linux-gnu"
-fi
-
-if [ -d "$MESA_LIB_DIR" ]; then
-  echo "Found $MESA_LIB_DIR"
-  export LD_LIBRARY_PATH="$MESA_LIB_DIR"
-  export MESA_GLES_VERSION_OVERRIDE="3.2"
-fi
 
 cura "$@"
