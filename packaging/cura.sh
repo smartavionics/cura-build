@@ -33,7 +33,7 @@ if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
       export MESA_GLES_VERSION_OVERRIDE="3.2"
     fi
   else
-    message = "Can't find glxinfo to test installed Mesa version, please do: sudo apt-get install mesa-utils"
+    message="Can't find glxinfo to test installed Mesa version, please do: sudo apt-get install mesa-utils"
     echo "$message"
   fi
 fi
