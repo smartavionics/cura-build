@@ -54,4 +54,9 @@ if [ -n "$CURA_GDB" ]; then
   $CURA_GDB -ex "set env PYTHONPATH = \"$PP\"" "$scriptdir/cura"
 else
   cura "$@"
+  if (($? != 0)); then
+    # did cura bomb due to missing libraries?
+    echo "Cura crashed, was that because a required library couldn't be found?"
+    LD_LIBRARY_PATH="$scriptdir:$LD_LIBRARY_PATH" ldd "${QT_PLUGIN_PATH}/platforms/libqxcb.so" | grep "not found"
+  fi
 fi
