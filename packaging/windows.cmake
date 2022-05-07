@@ -59,7 +59,7 @@ if(CPACK_GENERATOR MATCHES "NSIS64" OR CPACK_GENERATOR MATCHES "NSIS")
             COMPONENT "arduino"
     )
 
-    install(FILES ${EXTERNALPROJECT_INSTALL_PREFIX}/vcredist_x64.exe
+    install(FILES ${CMAKE_SOURCE_DIR}/win/vc_redist.x64.exe
             DESTINATION "."
             COMPONENT "vcredist"
     )
