@@ -49,12 +49,9 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/packaging/cura_license.txt"
 
 # Differentiate between a normal Cura installation and that of a different build type
 if(CURA_BUILDTYPE STREQUAL "")
-    set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura master")
-    set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura master")
-    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura master")
-    #set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${CURA_FULL_VERSION}")
-    #set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_FULL_VERSION}")
-    #set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${CURA_FULL_VERSION}")
+    set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${CURA_FULL_VERSION}")
+    set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_FULL_VERSION}")
+    set(CPACK_PACKAGE_INSTALL_DIRECTORY "Ultimaker Cura ${CURA_FULL_VERSION}")
 else()
     set(CPACK_CREATE_DESKTOP_LINKS Cura "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_FULL_VERSION}")
     set(CPACK_PACKAGE_EXECUTABLES Cura "Ultimaker Cura ${CURA_BUILDTYPE} ${CURA_FULL_VERSION}")
