@@ -17,9 +17,9 @@ endif()
 # ========================================
 
 if(CURA_BUILDTYPE STREQUAL "")
-    set(CPACK_PACKAGE_NAME "Ultimaker Cura")
+    set(CPACK_PACKAGE_NAME "Cura")
 else()
-    set(CPACK_PACKAGE_NAME "Ultimaker Cura ${CURA_BUILDTYPE}")
+    set(CPACK_PACKAGE_NAME "Cura ${CURA_BUILDTYPE}")
 endif()
 string(REPLACE " " "_" CPACK_FILE_NAME_NO_SPACES "${CPACK_PACKAGE_NAME}")
 
