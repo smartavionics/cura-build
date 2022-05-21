@@ -73,13 +73,13 @@ add_custom_command(
 # architecture detection in appimagetool is unreliable so explicitly specify the required architecture
 if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
     set(_appimage_arch arm)
-    set(APPIMAGE_FILENAME "Cura-${CURA_BRANCH_OR_TAG}-armhf.AppImage")
+    set(APPIMAGE_FILENAME "Cura-${CURA_VERSION}-armhf.AppImage")
 elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
     set(_appimage_arch arm_aarch64)
-    set(APPIMAGE_FILENAME "Cura-${CURA_BRANCH_OR_TAG}-aarch64.AppImage")
+    set(APPIMAGE_FILENAME "Cura-${CURA_VERSION}-aarch64.AppImage")
 else()
     set(_appimage_arch x86_64)
-    set(APPIMAGE_FILENAME "Cura-${CURA_BRANCH_OR_TAG}-x86_64.AppImage")
+    set(APPIMAGE_FILENAME "Cura-${CURA_VERSION}-x86_64.AppImage")
 endif()
 
 add_custom_command(
