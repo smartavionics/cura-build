@@ -1,6 +1,6 @@
 #!/bin/bash
 
-scriptdir=$(dirname $0)
+scriptdir=$(dirname $(realpath $0))
 
 if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
   export QT_XCB_GL_INTEGRATION=xcb_egl
@@ -53,7 +53,7 @@ if [ -n "$CURA_GDB" ]; then
   unset PYTHONHOME
   $CURA_GDB -ex "set env PYTHONPATH = \"$PP\"" "$scriptdir/cura"
 else
-  cura "$@"
+  "$scriptdir/cura" "$@"
   if (($? != 0)); then
     # did cura bomb due to missing libraries?
     echo "Cura crashed, was that because a required library couldn't be found?"
