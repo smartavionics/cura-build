@@ -187,6 +187,8 @@ build_options = {
         "libxcb-fixes.so.1",
         "libXdmcp.so.6",
         "libxshmfence.so.1",
+        "libwayland-egl.so.1",
+        "libwayland-cursor.so.0",
         "libwayland-client.so.0",
         "libwayland-server.so.0",
         "libxkbcommon.so.0",
