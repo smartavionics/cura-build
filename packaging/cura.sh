@@ -31,10 +31,13 @@ if [ "$HOSTTYPE" == "arm" -o "$HOSTTYPE" == "aarch64" ]; then
       echo "Found Mesa version 20 or higher"
       echo "Forcing GLES version to 3.2"
       export MESA_GLES_VERSION_OVERRIDE="3.2"
+    else
+      echo "Mesa version is less than 20, not forcing GLES version to 3.2"
     fi
   else
-    message="Can't find glxinfo to test installed Mesa version, please do: sudo apt-get install mesa-utils"
-    echo "$message"
+    echo "Assuming you have Mesa version 20 or higher"
+    echo "Forcing GLES version to 3.2"
+    export MESA_GLES_VERSION_OVERRIDE="3.2"
   fi
 fi
 
